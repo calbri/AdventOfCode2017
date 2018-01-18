@@ -58,12 +58,4 @@ for instruction in f.readlines():
     elif values[reg] > historicalMax:
         historicalMax = values[reg]
 
-maxVal = None
-
-for reg in values:
-    if maxVal == None:
-        maxVal = values[reg]
-    elif values[reg] > maxVal:
-        maxVal = values[reg]
-
-print(maxVal)
+print(historicalMax)
