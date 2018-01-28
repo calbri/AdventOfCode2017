@@ -1,50 +1,48 @@
-f = open("23input.txt")
+#In order for the loop to terminate,
+#  g = b - c = 0 must be True
+#Therefore, the loop runs 1000 times, as c = b + 17000, and b is incremented
+#by 17 each time.
 
-instructions = []
+#h is incremented by 1 when f is equal to 0
 
-for inst in f.readlines():
-    instruction = inst.split(" ")[0]
+#f is equal to 0 when g = d*e - b = 0
 
-    arg1 = inst.split(" ")[1].rstrip()
-    arg2 = inst.split(" ")[2].rstrip()
+#d starts at 2 and is incremented by 1 every big loop
+#e starts at 2 and is incremented by 1 each small loop
 
-    instructions.append([instruction, arg1, arg2])
+#The big loop occurs from d = 0 to b
+#The small loop occurs from e = 0 to b
 
-registers = {}
+#Since the loops cover all numbers from 1 to b, if there exists two numbers
+#between 2 and b that multiply to give b, then h is incremented
 
-for i in range(ord('a'), ord('h') + 1):
-    registers[chr(i)] = 0
+#In other words, if b is non-prime then h gets incremented.
 
-registers['a'] = 1
-
-i = 0
-
-while i < len(instructions):
-    inst = instructions[i]
-    firstArg = 0
-    secondArg = 0
-
-    if inst[1].isalpha():
-        firstArg = registers[inst[1]]
+def isPrime(num):
+    if num > 1:
+        for i in range(2,num):
+            if (num % i == 0):
+                return False
+        return True
     else:
-        firstArg = int(inst[1])
+        return False
+b = 81
+c = b
 
-    if inst[2].isalpha():
-        secondArg = registers[inst[2]]
-    else:
-        secondArg = int(inst[2])
+b *= 100
+b += 100000
 
-    if inst[0] == "set":
-        registers[inst[1]] = secondArg
-    elif inst[0] == "mul":
-        registers[inst[1]] *= secondArg
-    elif inst[0] == "sub":
-        registers[inst[1]] -= secondArg
-    elif inst[0] == "jnz":
-        if firstArg != 0:
-            i += secondArg - 1
+c = b
+c += 17000
 
-    i += 1
-    print(registers['h'])
+numHincrements = 1
 
-print(registers['h'])
+while (True):
+    if not(isPrime(b)):
+        numHincrements += 1
+    b += 17
+
+    if (b - c == 0):
+        break
+
+print(numHincrements)
