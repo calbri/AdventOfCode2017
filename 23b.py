@@ -35,14 +35,15 @@ b += 100000
 c = b
 c += 17000
 
-numHincrements = 1
+numHincrements = 0
 
 while (True):
     if not(isPrime(b)):
         numHincrements += 1
-    b += 17
 
     if (b - c == 0):
         break
+    else:
+        b += 17
 
 print(numHincrements)
