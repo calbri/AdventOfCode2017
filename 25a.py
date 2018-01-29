@@ -19,7 +19,10 @@ for line in f.readlines():
         states[stateToRead][currentVal].append(int(line.rstrip().split("value ")[1].split(".")[0]))
 
     if "Move one slot" in line:
-        states[stateToRead][currentVal].append(line.rstrip().split("to the ")[1].split(".")[0])
+        if line.rstrip().split("to the ")[1].split(".")[0] == "left":
+            states[stateToRead][currentVal].append(-1)
+        else:
+            states[stateToRead][currentVal].append(1)
 
     if "Continue with" in line:
         states[stateToRead][currentVal].append(line.rstrip().split("state ")[1].split(".")[0])
@@ -40,10 +43,7 @@ for i in range(0, checksum):
         locationsWith1.discard(position)
 
     #direction to move
-    if states[state][value][1] == "left":
-        position -= 1
-    else:
-        position += 1
+    position += states[state][value][1]
 
     #new state
     state = states[state][value][2]
