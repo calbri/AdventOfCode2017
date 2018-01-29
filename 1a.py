@@ -1,4 +1,5 @@
-numString = input()
+f = open("1input.txt")
+numString = f.readlines()[0].rstrip()
 firstDigit = numString[0]
 stringLength = len(numString)
 
@@ -13,4 +14,4 @@ for c in numString:
             matchSum += int(c)
     i += 1
 
-print(matchSum)    
+print(matchSum)

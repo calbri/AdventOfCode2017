@@ -1,5 +1,5 @@
-numString = input()
-firstDigit = numString[0]
+f = open("1input.txt")
+numString = f.readlines()[0].rstrip()
 stringLength = len(numString)
 offset = int(stringLength / 2)
 
